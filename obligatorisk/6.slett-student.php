@@ -21,9 +21,9 @@ if (isset($_POST["slettStudentKnapp"])) {
     if (!$brukernavn) {
         print("Brukernavn må fylles ut");
     } else {
-        include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+        include("db-tilkobling.php");  /
 
-        // Sjekk om studenten finnes
+        
         $sqlSetning = "SELECT * FROM student WHERE brukernavn='$brukernavn';";
         $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen");
         $antallRader = mysqli_num_rows($sqlResultat); 

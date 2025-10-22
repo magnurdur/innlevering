@@ -27,7 +27,7 @@ if (isset($_POST["registrerStudentKnapp"])) {
     if (!$brukernavn || !$fornavn || !$etternavn || !$klassekode) {
         print("Alle felter må fylles ut.");
     } else {
-        include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+        include("db-tilkobling.php");  
 
         $sqlSetning = "SELECT * FROM student WHERE brukernavn='$brukernavn';";
         $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen.");

@@ -32,7 +32,7 @@ if (isset($_POST["slettKlasseKnapp"])) {
     if ($antallRader == 0) {
       echo "Klassen finnes ikke";
     } else {	  
-      // Slett klassen
+      
       $sqlSetning = "DELETE FROM klasse WHERE klassekode='$klassekode';";
       mysqli_query($db, $sqlSetning) or die("Ikke mulig å slette data i databasen");
   

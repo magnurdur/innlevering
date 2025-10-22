@@ -8,7 +8,7 @@
 <h3>Alle registrerte studenter</h3>
 
 <?php
-include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+include("db-tilkobling.php");  
 
 $sqlSetning = "SELECT * FROM student ORDER BY brukernavn;";
 $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen.");

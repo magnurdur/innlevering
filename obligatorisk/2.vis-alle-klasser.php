@@ -8,7 +8,7 @@
 <h3>Alle registrerte klasser</h3>
 
 <?php
-include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+include("db-tilkobling.php");  
 
 $sqlSetning = "SELECT * FROM klasse ORDER BY klassekode;";
 $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig &aring; hente data fra databasen.");
