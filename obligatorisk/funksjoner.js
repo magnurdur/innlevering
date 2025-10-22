@@ -1,6 +1,6 @@
 <?php  
 
-&host = getenv('DB_HOST');
+$host = getenv('DB_HOST');
 $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 $database = getenv('DB_DATABASE');
