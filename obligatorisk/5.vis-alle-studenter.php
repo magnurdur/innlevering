@@ -1,27 +1,35 @@
-<?php  /* vis-alle-studenter */
+<?php  
+/* vis-alle-studenter */
 /*
-/*  Programmet skriver ut alle registrerte studenter
+/*  Programmet viser alle registrerte studenter i databasen
 */
+?>
+
+<h3>Alle registrerte studenter</h3>
+
+<?php
 include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
 
-$sqlSetning = "SELECT * FROM student;";
-$sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen");
+$sqlSetning = "SELECT * FROM student ORDER BY brukernavn;";
+$sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen.");
 
-$antallRader = mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
+$antallRader = mysqli_num_rows($sqlResultat);
 
-print("<h3>Registrerte studenter</h3>");
-print("<table border=1>");
-print("<tr><th>Brukernavn</th><th>Fornavn</th><th>Etternavn</th><th>Klassekode</th></tr>");
+if ($antallRader == 0) {
+    print("Det finnes ingen registrerte studenter i databasen.");
+} else {
+    print("<table border='1' cellspacing='0' cellpadding='5'>");
+    print("<tr><th>Brukernavn</th><th>Fornavn</th><th>Etternavn</th><th>Klassekode</th></tr>");
 
-for ($r = 1; $r <= $antallRader; $r++) {
-    $rad = mysqli_fetch_array($sqlResultat);
-    $brukernavn = $rad["brukernavn"];
-    $fornavn = $rad["fornavn"];
-    $etternavn = $rad["etternavn"];
-    $klassekode = $rad["klassekode"];
+    while ($rad = mysqli_fetch_array($sqlResultat)) {
+        $brukernavn = $rad["brukernavn"];
+        $fornavn = $rad["fornavn"];
+        $etternavn = $rad["etternavn"];
+        $klassekode = $rad["klassekode"];
 
-    print("<tr><td>$brukernavn</td><td>$fornavn</td><td>$etternavn</td><td>$klassekode</td></tr>");
+        print("<tr><td>$brukernavn</td><td>$fornavn</td><td>$etternavn</td><td>$klassekode</td></tr>");
+    }
+
+    print("</table>");
 }
-
-print("</table>");
 ?>
