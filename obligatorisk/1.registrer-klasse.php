@@ -25,7 +25,7 @@ if (isset($_POST["registrerKlasseKnapp"])) {
     if (!$klassekode || !$klassenavn || !$studiumkode) {
         print("Alle felter m&aring; fylles ut.");
     } else {
-        include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+        include("db-tilkobling.php");  
 
         $sqlSetning = "SELECT * FROM klasse WHERE klassekode='$klassekode';";
         $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig &aring; hente data fra databasen.");
