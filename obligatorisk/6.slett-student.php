@@ -21,7 +21,7 @@ if (isset($_POST["slettStudentKnapp"])) {
     if (!$brukernavn) {
         print("Brukernavn må fylles ut");
     } else {
-        include("db-tilkobling.php");  /
+        include("db-tilkobling.php");
 
         
         $sqlSetning = "SELECT * FROM student WHERE brukernavn='$brukernavn';";
