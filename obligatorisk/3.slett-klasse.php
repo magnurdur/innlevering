@@ -53,45 +53,21 @@ if (isset($_POST["slettKlasseKnapp"])) {
       echo "Klassen finnes ikke.";
     } else {
       
-      $sqlSetning = "SELECT * FROM student WHERE klassekode='$klassekode';";
+      $sqlSetning = "SELECT COUNT(*) AS antall FROM student WHERE klassekode='$klassekode';";
       $sqlResultat = mysqli_query($db, $sqlSetning) or die("Feil ved henting av studentdata.");
-      $antallStudenter = mysqli_num_rows($sqlResultat);
+      $rad = mysqli_fetch_array($sqlResultat);
+      $antallStudenter = $rad["antall"];
 
       if ($antallStudenter > 0) {
-        echo "Kan ikke slette klassen fordi den har registrerte studenter.";
+        
+        echo "Klassen <b>$klassekode</b> kan ikke slettes fordi den har $antallStudenter registrerte student(er).";
       } else {
         
         $sqlSetning = "DELETE FROM klasse WHERE klassekode='$klassekode';";
-        mysqli_query($db, $sqlSetning) or die("Ikke mulig å slette data i databasen.");
+        mysqli_query($db, $sqlSetning) or die("Ikke mulig å slette klassen fra databasen.");
     
         echo "Følgende klasse er nå slettet: <b>$klassekode</b><br />";
       }
-    }
-  }
-}
-?> 
-<?php
-if (isset($_POST["slettKlasseKnapp"])) {	
-  $klassekode = $_POST["klassekode"];
-
-  if (!$klassekode) {
-    echo "Du må velge en klasse.";
-  } else {
-    include("db-tilkobling.php");  
-
-    
-    $sqlSetning = "SELECT * FROM klasse WHERE klassekode='$klassekode';";
-    $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen.");
-    $antallRader = mysqli_num_rows($sqlResultat); 
-
-    if ($antallRader == 0) {
-      echo "Klassen finnes ikke.";
-    } else {	  
-      
-      $sqlSetning = "DELETE FROM klasse WHERE klassekode='$klassekode';";
-      mysqli_query($db, $sqlSetning) or die("Ikke mulig å slette data i databasen.");
-  
-      echo "Følgende klasse er nå slettet: <b>$klassekode</b><br />";
     }
   }
 }
