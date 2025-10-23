@@ -1,5 +1,5 @@
 <?php  
-/* vis-alle-klasser */
+/*  vis-alle-klasser */
 /*
 /*  Programmet viser alle registrerte klasser i databasen
 */

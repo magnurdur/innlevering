@@ -1,8 +1,8 @@
 <?php  
-/* slett-klasse */
+/*  slett-klasse */
 /*
-/* Programmet lager et skjema for å velge en klasse som skal slettes  
-/* Programmet sletter den valgte klassen
+/*  Programmet lager et skjema for å velge en klasse som skal slettes  
+/*  Programmet sletter den valgte klassen dersom den ikke har registrerte studenter
 */
 ?> 
 
@@ -35,6 +35,41 @@
   <input type="submit" value="Slett klasse" name="slettKlasseKnapp" id="slettKlasseKnapp" /> 
 </form>
 
+<?php
+if (isset($_POST["slettKlasseKnapp"])) {	
+  $klassekode = $_POST["klassekode"];
+
+  if (!$klassekode) {
+    echo "Du må velge en klasse.";
+  } else {
+    include("db-tilkobling.php");  
+
+    
+    $sqlSetning = "SELECT * FROM klasse WHERE klassekode='$klassekode';";
+    $sqlResultat = mysqli_query($db, $sqlSetning) or die("Ikke mulig å hente data fra databasen.");
+    $antallRader = mysqli_num_rows($sqlResultat); 
+
+    if ($antallRader == 0) {
+      echo "Klassen finnes ikke.";
+    } else {
+      
+      $sqlSetning = "SELECT * FROM student WHERE klassekode='$klassekode';";
+      $sqlResultat = mysqli_query($db, $sqlSetning) or die("Feil ved henting av studentdata.");
+      $antallStudenter = mysqli_num_rows($sqlResultat);
+
+      if ($antallStudenter > 0) {
+        echo "Kan ikke slette klassen fordi den har registrerte studenter.";
+      } else {
+        
+        $sqlSetning = "DELETE FROM klasse WHERE klassekode='$klassekode';";
+        mysqli_query($db, $sqlSetning) or die("Ikke mulig å slette data i databasen.");
+    
+        echo "Følgende klasse er nå slettet: <b>$klassekode</b><br />";
+      }
+    }
+  }
+}
+?> 
 <?php
 if (isset($_POST["slettKlasseKnapp"])) {	
   $klassekode = $_POST["klassekode"];

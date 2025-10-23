@@ -1,5 +1,5 @@
 <?php  
-/* vis-alle-studenter */
+/*  vis-alle-studenter */
 /*
 /*  Programmet viser alle registrerte studenter i databasen
 */
